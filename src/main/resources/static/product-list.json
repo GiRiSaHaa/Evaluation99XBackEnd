@@ -1,0 +1,14 @@
+ [
+    {
+      "id": 1,
+      "name": "Penguin-ears",
+      "unitPerCarton": 20,
+      "cartonPrice": 175
+    },
+    {
+      "id": 2,
+      "name": "Horseshoe",
+      "unitPerCarton": 5,
+      "cartonPrice": 825
+    }
+  ]
