@@ -11,12 +11,19 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Repository class for manage product related queries.
+ */
 @Repository
 public class ProductRepository {
 
     // create Object Mapper
     ObjectMapper mapper = new ObjectMapper();
 
+    /**
+     * Return all products.
+     * @return the list of all Products
+     */
     public List<Product> getAllProducts() {
 
         List<Product> productList = null;
@@ -32,6 +39,11 @@ public class ProductRepository {
         return productList;
     }
 
+    /**
+     * Return product for given product ID.
+     * @param productId the Product ID.
+     * @return the Product.
+     */
     public Optional<Product> getProduct(long productId){
         return getAllProducts().stream().filter( p -> p.getId() == productId).findFirst();
     }

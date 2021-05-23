@@ -1,33 +1,25 @@
 package com.nintyninex.technical.assessment.controllers;
 
 import com.nintyninex.technical.assessment.dto.PriceListResponse;
-import com.nintyninex.technical.assessment.models.Product;
 import com.nintyninex.technical.assessment.services.PriceEngineService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
+/**
+ * Controller class for expose price engine related APIs.
+ */
 @CrossOrigin(maxAge = 3600)
 @RestController
-@RequestMapping("/products")
+@RequestMapping("/price")
 public class PriceEngineController {
 
     private final PriceEngineService priceEngineService;
 
     public PriceEngineController(PriceEngineService priceEngineService) {
         this.priceEngineService = priceEngineService;
-    }
-
-    /**
-     * Return list of products
-     * @return the list of all products.
-     */
-    @RequestMapping(method = GET, path ="/products")
-    public List<Product> getProducts(){
-        return priceEngineService.getProducts();
     }
 
     /**
@@ -42,6 +34,12 @@ public class PriceEngineController {
         return priceEngineService.calculatePrice(productId, qty);
     }
 
+    /**
+     * Return price list for given range of quantity.
+     * @param productId the product ID to get price list.
+     * @param count the range of quantity.
+     * @return the List of price for given range of quantities.
+     */
     @RequestMapping(value = "/calculate/price-list/{productId}/{count}", method = GET)
     @ResponseBody
     public List<PriceListResponse> getBulkPriceList(@PathVariable("productId") long productId, @PathVariable("count") int count ){
