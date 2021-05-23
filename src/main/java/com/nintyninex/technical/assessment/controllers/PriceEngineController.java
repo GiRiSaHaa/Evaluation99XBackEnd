@@ -1,10 +1,12 @@
 package com.nintyninex.technical.assessment.controllers;
 
+import com.nintyninex.technical.assessment.dto.PriceListResponse;
 import com.nintyninex.technical.assessment.models.Product;
 import com.nintyninex.technical.assessment.services.PriceEngineService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
@@ -38,5 +40,11 @@ public class PriceEngineController {
     @ResponseBody
     public double calculatePrice(@PathVariable("productId") long productId, @PathVariable("qty") int qty){
         return priceEngineService.calculatePrice(productId, qty);
+    }
+
+    @RequestMapping(value = "/calculate/price-list/{productId}/{count}", method = GET)
+    @ResponseBody
+    public List<PriceListResponse> getBulkPriceList(@PathVariable("productId") long productId, @PathVariable("count") int count ){
+        return priceEngineService.getBulkPriceList(productId, count);
     }
 }

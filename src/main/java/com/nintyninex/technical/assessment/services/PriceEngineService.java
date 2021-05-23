@@ -1,13 +1,13 @@
 package com.nintyninex.technical.assessment.services;
 
+import com.nintyninex.technical.assessment.dto.PriceListResponse;
 import com.nintyninex.technical.assessment.models.Product;
 import com.nintyninex.technical.assessment.repositories.ProductRepository;
 import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
-import java.util.List;
-import java.util.Optional;
+import java.util.*;
 
 @Service
 public class PriceEngineService {
@@ -53,5 +53,15 @@ public class PriceEngineService {
         System.out.println("totalUnitPrice: " + totalUnitPrice);
         BigDecimal bd = new BigDecimal(totalUnitPrice).setScale(2, RoundingMode.HALF_UP);
         return bd.doubleValue();
+    }
+
+    public List<PriceListResponse> getBulkPriceList(long productId, int count) {
+        List<PriceListResponse> priceList = new ArrayList<>();
+        PriceListResponse priceListResponse = null;
+        for(int i = 1; i <= count; i++){
+            priceListResponse = new PriceListResponse(i,calculatePrice(productId,i));
+            priceList.add(priceListResponse);
+        }
+        return priceList;
     }
 }
